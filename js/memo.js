@@ -4,10 +4,10 @@ var Card = function(cardNumber, cardImage){
     this.image = cardImage;
 }
 
-//funkcja tworząca odpowiednią ilość kart w zależności od wpisanej przez użytkownika wartości par
 var board = document.querySelector(".game_board");
 var cardClicked = [];
 
+//funkcja zbierająca wybrane karty
 function cardCollect (){
     if(cardClicked.length === 2){
         storeCard(cardClicked[0],cardClicked[1]);
@@ -15,8 +15,8 @@ function cardCollect (){
         cardClicked = [];
     }
 }
+//funkcja do porównywania czy wybrane karty są parą
 function storeCard(card1, card2){
-    console.log(card1);
     if(card1.dataset.id === card2.dataset.id){
         card1.classList.add("hidden");
         card1.classList.remove("clicked");
@@ -29,7 +29,17 @@ function storeCard(card1, card2){
         cardClicked = [];
     }
 };
-
+//funkcja do mieszania kart przed ułożeniem
+function cardSuffle() {
+    var parent = document.querySelector(".game_board");
+    console.log(parent);
+    var frag = document.createDocumentFragment();
+    while (parent.children.length) {
+        frag.appendChild(parent.children[Math.floor(Math.random() * parent.children.length)]);
+    }
+    parent.appendChild(frag);
+}
+//funkcja tworząca odpowiednią ilość kart w zależności od wpisanej przez użytkownika wartości par
 function cardCreate(pair){
     var cardNumber = 2 * pair;
     var cardArray = [];
@@ -47,11 +57,12 @@ function cardCreate(pair){
                     this.style.backgroundColor = "black";
                     this.classList.add("clicked");
                     cardClicked.push(this);
-                    console.log(cardClicked);
                     cardCollect();
                 });
                 counter += 1;
             }
         }
+
+cardSuffle();
 }
-cardCreate(14);
+cardCreate(20);
