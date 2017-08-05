@@ -6,31 +6,45 @@ var Card = function(cardNumber, cardImage){
 
 var board = document.querySelector(".game_board");
 var cardClicked = [];
+var cardArray = [];
+var score = 0
 
 //funkcja zbierająca wybrane karty
 function cardCollect (){
+    console.log(cardClicked)
     if(cardClicked.length === 2){
         storeCard(cardClicked[0],cardClicked[1]);
-    } else if (cardClicked.length > 2) {
         cardClicked = [];
-    }
-}
+    };
+};
 //funkcja do porównywania czy wybrane karty są parą
 function storeCard(card1, card2){
-    if(card1.dataset.id === card2.dataset.id){
-        card1.classList.add("hidden");
-        card1.classList.remove("clicked");
-        card2.classList.add("hidden");
-        card2.classList.remove("clicked");
+    if(card1[0].number === card2[0].number && card1[0] != card2[0]){
+        console.log('jest para')        
+        card1[1].style.backgroundColor = "blue";
+        card2[1].style.backgroundColor = "blue";
+        card1[1].classList.toggle("clicked");
+        card2[1].classList.toggle("clicked");
         cardClicked = [];
+        score = score + 10
+        
     } else {
-        card1.style.backgroundColor = "white";
-        card2.style.backgroundColor = "white";
+        console.log('pudło')
         cardClicked = [];
+        var timeOut = setTimeout(function(){
+            card1[1].innerText = "";
+            card2[1].innerText = "";
+            card1[1].style.backgroundColor = "white";
+            card2[1].style.backgroundColor = "white";
+            card1[1].classList.toggle("clicked");
+            card2[1].classList.toggle("clicked");
+            
+            score = score - 1
+        }, 1000);
     }
 };
 //funkcja do mieszania kart przed ułożeniem
-function cardSuffle() {
+function cardShuffle() {
     var parent = document.querySelector(".game_board");
     console.log(parent);
     var frag = document.createDocumentFragment();
@@ -42,27 +56,38 @@ function cardSuffle() {
 //funkcja tworząca odpowiednią ilość kart w zależności od wpisanej przez użytkownika wartości par
 function cardCreate(pair){
     var cardNumber = 2 * pair;
-    var cardArray = [];
     var counter = 0;
         for(var i = 0; i < pair; i++){
             for(var j = 0; j < 2; j++){
-                cardArray[counter] = new Card (i, "karta o numerze " + i);
-                var eventObject = cardArray[counter];
-                var newDiv = document.createElement("div");
-                newDiv.classList.add("card");
-                newDiv.innerText = cardArray[counter].image;
-                newDiv.dataset.id = cardArray[counter].number;
-                board.appendChild(newDiv);
-                newDiv.addEventListener("click", function(event){
-                    this.style.backgroundColor = "black";
-                    this.classList.add("clicked");
-                    cardClicked.push(this);
-                    cardCollect();
-                });
-                counter += 1;
-            }
-        }
+                (function(){
+                    cardArray[counter] = new Card (i, "karta o numerze " + i);
+                    var eventObject = cardArray[counter];
+                    var newDiv = document.createElement("div");
+                    newDiv.classList.add("card");
+                    newDiv.innerText = ' ';   
+                    // newDiv.dataset.id = cardArray[counter].number;
+                    board.appendChild(newDiv);
+                    var c = cardArray[counter]
 
-cardSuffle();
-}
-cardCreate(20);
+                    function makeListener(){
+                        newDiv.addEventListener("click", function(){
+                            console.log(score)
+                            this.style.backgroundColor = "grey";
+                            this.classList.toggle("clicked");
+                            this.innerText = c.image;
+                            // cardClicked.push(this);
+                            cardClicked.push([c,newDiv]);
+                            cardCollect();
+                        });
+                    };
+                    makeListener()
+                }());
+            };
+        counter += 1;
+        };
+
+cardShuffle();
+};
+
+
+cardCreate(12);
