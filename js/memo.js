@@ -6,6 +6,7 @@ var Card = function(cardNumber, cardImage){
 
 var board = document.querySelector(".game_board");
 var cardClicked = [];
+var cardArray = [];
 
 //funkcja zbierająca wybrane karty
 function cardCollect (){
@@ -18,19 +19,23 @@ function cardCollect (){
 //funkcja do porównywania czy wybrane karty są parą
 function storeCard(card1, card2){
     if(card1.dataset.id === card2.dataset.id){
-        card1.classList.add("hidden");
-        card1.classList.remove("clicked");
-        card2.classList.add("hidden");
-        card2.classList.remove("clicked");
-        cardClicked = [];
+        var timeOut = setTimeout(function(){
+            card1.classList.add("hidden");
+            card1.classList.remove("clicked");
+            card2.classList.add("hidden");
+            card2.classList.remove("clicked");
+            cardClicked = [];
+        }, 1000);
     } else {
-        card1.style.backgroundColor = "white";
-        card2.style.backgroundColor = "white";
-        cardClicked = [];
+        var timeOut = setTimeout(function(){
+            card1.style.backgroundColor = "white";
+            card2.style.backgroundColor = "white";
+            cardClicked = [];
+        }, 1000);
     }
 };
 //funkcja do mieszania kart przed ułożeniem
-function cardSuffle() {
+function cardShuffle() {
     var parent = document.querySelector(".game_board");
     console.log(parent);
     var frag = document.createDocumentFragment();
@@ -42,7 +47,6 @@ function cardSuffle() {
 //funkcja tworząca odpowiednią ilość kart w zależności od wpisanej przez użytkownika wartości par
 function cardCreate(pair){
     var cardNumber = 2 * pair;
-    var cardArray = [];
     var counter = 0;
         for(var i = 0; i < pair; i++){
             for(var j = 0; j < 2; j++){
@@ -55,14 +59,16 @@ function cardCreate(pair){
                 board.appendChild(newDiv);
                 newDiv.addEventListener("click", function(event){
                     this.style.backgroundColor = "black";
-                    this.classList.add("clicked");
+                    this.classList.toggle("clicked");
                     cardClicked.push(this);
                     cardCollect();
                 });
-                counter += 1;
             }
+        counter += 1;
         }
 
-cardSuffle();
+cardShuffle();
 }
+
+
 cardCreate(20);
