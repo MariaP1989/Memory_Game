@@ -54,8 +54,9 @@ function cardCreate(pair){
                 var eventObject = cardArray[counter];
                 var newDiv = document.createElement("div");
                 newDiv.classList.add("card");
-                newDiv.innerText = cardArray[counter].image;
+                newDiv.dataset.name = cardArray[counter].image;
                 newDiv.dataset.id = cardArray[counter].number;
+
                 board.appendChild(newDiv);
                 newDiv.addEventListener("click", function(event){
                     this.style.backgroundColor = "black";
