@@ -20,11 +20,21 @@ function cardCollect (){
 //funkcja do porównywania czy wybrane karty są parą
 function storeCard(card1, card2){
     if(card1[0].number === card2[0].number && card1[0] != card2[0]){
-        console.log('jest para')        
+        console.log('jest para')  
         card1[1].style.backgroundColor = "blue";
         card2[1].style.backgroundColor = "blue";
         card1[1].classList.toggle("clicked");
-        card2[1].classList.toggle("clicked");
+        card2[1].classList.toggle("clicked");    
+        //removing listener from guessed cards
+        var old_element1 = card1[1];
+        var new_element1 = card1[1].cloneNode(true);
+        old_element1.parentNode.replaceChild(new_element1, old_element1);  
+        var old_element2 = card2[1];
+        var new_element2 = card2[1].cloneNode(true);
+        old_element2.parentNode.replaceChild(new_element2, old_element2);
+
+
+        // card1[1].removeEventListener('click',setListener);
         cardClicked = [];
         score = score + 10
         
