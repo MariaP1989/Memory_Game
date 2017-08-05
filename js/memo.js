@@ -4,6 +4,9 @@ var Card = function(cardNumber, cardImage){
     this.image = cardImage;
 }
 
+//tablica z linkami do karty
+ var linkArray =["url('../icons/001.svg')"] //"002.svg", "003.svg", "004.svg", "005.svg", "006.svg",
+
 var board = document.querySelector(".game_board");
 var cardClicked = [];
 var cardArray = [];
@@ -20,16 +23,18 @@ function cardCollect (){
 function storeCard(card1, card2){
     if(card1.dataset.id === card2.dataset.id){
         var timeOut = setTimeout(function(){
-            card1.classList.add("hidden");
             card1.classList.remove("clicked");
-            card2.classList.add("hidden");
+            card1.classList.add("paired");
             card2.classList.remove("clicked");
+            card2.classList.add("paired");
             cardClicked = [];
         }, 1000);
     } else {
         var timeOut = setTimeout(function(){
-            card1.style.backgroundColor = "white";
-            card2.style.backgroundColor = "white";
+            card1.classList.remove("clicked");
+            card1.classList.toggle("card");
+            card2.classList.remove("clicked");
+            card2.classList.toggle("card");
             cardClicked = [];
         }, 1000);
     }
@@ -50,17 +55,16 @@ function cardCreate(pair){
     var counter = 0;
         for(var i = 0; i < pair; i++){
             for(var j = 0; j < 2; j++){
-                cardArray[counter] = new Card (i, "karta o numerze " + i);
-                var eventObject = cardArray[counter];
+                cardArray[counter] = new Card (i, linkArray[i]);
                 var newDiv = document.createElement("div");
                 newDiv.classList.add("card");
-                newDiv.dataset.name = cardArray[counter].image;
+                newDiv.dataset.image = cardArray[counter].image;
                 newDiv.dataset.id = cardArray[counter].number;
-
                 board.appendChild(newDiv);
                 newDiv.addEventListener("click", function(event){
-                    this.style.backgroundColor = "black";
-                    this.classList.toggle("clicked");
+                    this.classList.add("clicked");
+                    this.classList.remove("card");
+                    this.style.backgroundImage = this.dataset.image;
                     cardClicked.push(this);
                     cardCollect();
                 });
@@ -72,4 +76,4 @@ cardShuffle();
 }
 
 
-cardCreate(20);
+cardCreate(30);
