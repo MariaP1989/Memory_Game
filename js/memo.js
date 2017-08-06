@@ -21,8 +21,10 @@ var cardClicked = [];
 var cardArray = [];
 var score = 0;
 
+
 //funkcja zbierająca wybrane karty
 function cardCollect (){
+    console.log(cardClicked)
     if(cardClicked.length === 2){
         storeCard(cardClicked[0],cardClicked[1]);
         cardClicked = [];
@@ -31,11 +33,13 @@ function cardCollect (){
 //funkcja do porównywania czy wybrane karty są parą
 function storeCard(card1, card2){
     if(card1[0].number === card2[0].number && card1[0] != card2[0]){
+
         console.log('jest para') 
         card1[1].classList.remove("clicked");
         card1[1].classList.add("paired");
         card2[1].classList.remove("clicked");
         card2[1].classList.add("paired");    
+
         //removing listener from guessed cards
         var old_element1 = card1[1];
         var new_element1 = card1[1].cloneNode(true);
@@ -48,7 +52,7 @@ function storeCard(card1, card2){
         // card1[1].removeEventListener('click',setListener);
         cardClicked = [];
         score = score + 10
-    
+
     } else {
         console.log('pudło')
         cardClicked = [];
@@ -81,6 +85,7 @@ function cardCreate(pair){
         for(var i = 0; i < pair; i++){
             for(var j = 0; j < 2; j++){
                 (function(){
+
                     cardArray[counter] = new Card (i, linkArray[i]);
                     var newDiv = document.createElement("div");
                     newDiv.classList.add("card");
@@ -108,6 +113,5 @@ function cardCreate(pair){
 
 cardShuffle();
 };
-
 
 cardCreate(pair);
