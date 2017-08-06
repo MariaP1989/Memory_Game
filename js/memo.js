@@ -4,10 +4,8 @@ var Card = function(cardNumber, cardImage){
     this.image = cardImage;
 }
 
-var pair = 10
-
 //tablica z linkami do karty
-var pair = 10;
+var pair = 3;
 var linkArray =[];
 for(var i = 1; i <= pair; i++){
     if(i<10){
@@ -26,7 +24,6 @@ function cardCollect (){
     if(cardClicked.length === 2){
         console.log(cardClicked);
         storeCard(cardClicked[0],cardClicked[1]);
-    } else if (cardClicked.length > 2) {
         cardClicked = [];
     }
 }
@@ -41,7 +38,7 @@ function storeCard(card1, card2){
             card2.classList.add("paired");
             card2.removeAttribute("style");
             cardClicked = [];
-        }, 1000);
+        }, 500);
     } else {
         var timeOut = setTimeout(function(){
             card1.classList.remove("clicked");
@@ -103,4 +100,4 @@ function cardCreate(pair){
 cardShuffle();
 }
 
-cardCreate(10);
+cardCreate(pair);
