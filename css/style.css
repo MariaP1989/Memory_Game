@@ -1,33 +1,83 @@
+body {
+    background-image: url("../images/OAYTOW0.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 1200px;
+    height: 820px;
+    margin: 0;
+    position: relative;
+}
+
 .game_menu {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 50px;
-    width: 900px;
-    height: 120px;
+    width: 1000px;
+    height: 90px;
+    clear: both;
+}
+
+#title {
+    line-height: 70px;
+    font-size: 70px;
+    font-weight: bolder;
+    margin-top: 20px;
+    width:60%;
+    float: left;
+}
+#menu {
+    width: 10%;
+    height: 90px;
+    margin:0;
     border: 1px solid black;
+    float: right;
 }
 .game_board{
     margin-left: auto;
     margin-right: auto;
-    width: 900px;
+    width: 1000px;
     overflow: auto;
-    border: 1px solid black;
-
 }
 .card {
+    background-image: url("../images/icon.svg");
+    background-color: white;
+    background-size: cover;
+    border-radius: 5px;
     display: inline-block;
-    margin: 5px;
-    width: 100px;
-    height: 100px;
+    margin: 3px;
+    width: 90px;
+    height: 90px;
     border: 1px solid black;
+}
+.clicked {
+    /*background-color: white;*/
+    /*background-image: none;*/
+    border-radius: 5px;
+    display: inline-block;
+    margin: 3px;
+    width: 90px;
+    height: 90px;
+    border: 1px solid black;
+}
+.paired {
+    background-image: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 3px;
+    width: 90px;
+    height: 90px;
 }
 .hidden {
     display: none;
 }
 footer {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
     width: 900px;
-    border: 1px solid black;
+    height: 40px;
+    font-size: 26px;
+    color: rgba(88,80,80, 0.9);
+    font-weight: 500;
 }
