@@ -4,8 +4,17 @@ var Card = function(cardNumber, cardImage){
     this.image = cardImage;
 }
 
+var pair = 10
+
 //tablica z linkami do karty
- var linkArray =["url('../icons/001.svg')"] //"002.svg", "003.svg", "004.svg", "005.svg", "006.svg",
+var linkArray =[] //"002.svg", "003.svg", "004.svg", "005.svg", "006.svg",
+for(var i = 1; i <= pair; i++){
+    if(i<10){
+        linkArray.push("url(./icons/00"+i+".svg)");
+    } else {
+        linkArray.push("url(./icons/0"+i+".svg)")
+    }
+};
 
 var board = document.querySelector(".game_board");
 var cardClicked = [];
@@ -76,4 +85,4 @@ cardShuffle();
 }
 
 
-cardCreate(30);
+cardCreate(pair);
