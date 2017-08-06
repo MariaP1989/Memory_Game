@@ -49,28 +49,27 @@ body {
     width: 90px;
     height: 90px;
     border: 1px solid black;
+    background-size: cover;
 }
 .clicked {
-    /*background-color: white;*/
-    /*background-image: none;*/
+    background-color: white;
     border-radius: 5px;
     display: inline-block;
     margin: 3px;
     width: 90px;
     height: 90px;
     border: 1px solid black;
+    background-size: cover;
 }
 .paired {
     background-image: none;
     border-radius: 5px;
     display: inline-block;
-    margin: 3px;
+    margin: 4px;
     width: 90px;
     height: 90px;
 }
-.hidden {
-    display: none;
-}
+
 footer {
     position: absolute;
     bottom: 10px;
