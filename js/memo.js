@@ -4,16 +4,19 @@ var Card = function(cardNumber, cardImage){
     this.image = cardImage;
 }
 
+var pair = 10
+
 //tablica z linkami do karty
-var linkArray =[];
 var pair = 10;
+var linkArray =[];
 for(var i = 1; i <= pair; i++){
-    if(i < 10){
+    if(i<10){
         linkArray.push("url(./icons/00"+i+".svg)");
     } else {
         linkArray.push("url(./icons/0"+i+".svg)")
     }
 };
+
 var board = document.querySelector(".game_board");
 var cardClicked = [];
 var cardArray = [];
@@ -99,6 +102,5 @@ function cardCreate(pair){
 
 cardShuffle();
 }
-
 
 cardCreate(10);
