@@ -1,25 +1,51 @@
 
+var button = document.querySelector(".submit");
+var linkArray = []
+button.addEventListener("click", function(event){
+    event.preventDefault();
+    var input = document.querySelector("#pair_number");
+    pair = parseInt(input.value, 10);
+    input.value = "";
+    document.querySelector(".game_start").style.display = "none";
+    document.querySelector(".game_board").style.display = "block";
+    //tablica z linkami do karty
+
+    console.log(pair)
+    for(var i = 1; i <= pair; i++){
+        if(i < 10){
+            linkArray.push("url(./icons/00"+i+".svg)");
+        } else {
+            linkArray.push("url(./icons/0"+i+".svg)");
+        }
+    };
+    console.log(linkArray)
+    cardCreate(pair);
+});
+
+
+
 var Card = function(cardNumber, cardImage){
     this.number = cardNumber;
     this.image = cardImage;
 }
 
-var pair = 3;
+//var input = document.querySelector("#pair_number");
 
-//tablica z linkami do karty
-var linkArray =[];
-for(var i = 1; i <= pair; i++){
-    if(i < 10){
-        linkArray.push("url(./icons/00"+i+".svg)");
-    } else {
-        linkArray.push("url(./icons/0"+i+".svg)");
-    }
-};
 
 var board = document.querySelector(".game_board");
 var cardClicked = [];
 var cardArray = [];
 var score = 0;
+
+//tablica z linkami do karty
+// var linkArray =[];
+// for(var i = 1; i <= pair; i++){
+//     if(i < 10){
+//         linkArray.push("url(./icons/00"+i+".svg)");
+//     } else {
+//         linkArray.push("url(./icons/0"+i+".svg)");
+//     }
+// };
 
 //funkcja zbierająca wybrane karty
 function cardCollect (){
@@ -104,5 +130,3 @@ function cardCreate(pair){
     };
 cardShuffle();
 };
-
-cardCreate(pair);
