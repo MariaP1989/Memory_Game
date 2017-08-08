@@ -1,16 +1,18 @@
 var button = document.querySelector(".submit");
-var linkArray = [];
-var score = 10;
 document.querySelector(".game_end").style.display = "none";
+var board = document.querySelector(".game_board");
+var cardClicked = [];
+var cardArray = [];
+var linkArray = [];
+
 //listener pozwalajacy na zaakceptowanie i przekazanie wybranej ilości par do gry
 button.addEventListener("click", function(event){
     event.preventDefault();
     var input = document.querySelector("#pair_number");
         if(parseInt(input.value,10) > 0 && parseInt(input.value, 10) <= 30) {
-            pair = parseInt(input.value, 10);
+            var pair = parseInt(input.value, 10);
             input.value = "";
             document.querySelector(".game_start").style.display = "none";
-
         } else {
             input.value = "";
             return false;
@@ -32,10 +34,6 @@ var Card = function(cardNumber, cardImage){
     this.number = cardNumber;
     this.image = cardImage;
 }
-
-var board = document.querySelector(".game_board");
-var cardClicked = [];
-var cardArray = [];
 
 //funkcja zbierająca wybrane karty
 function cardCollect (){
@@ -73,7 +71,7 @@ function storeCard(card1, card2){
             score += 10;
             span_score.innerText = score;
             var finish = document.querySelectorAll(".card");
-            console.log(finish.length);
+
             if(finish.length == 0){
                 document.querySelector(".game_end").style.display = "block";
                 document.querySelector(".game_board").style.display = "none";
@@ -96,26 +94,23 @@ function storeCard(card1, card2){
     }
 };
 
-
 //funkcja do mieszania kart przed ułożeniem na planszy
-var parent = document.querySelector(".game_board");
-
 function cardShuffle() {
     var frag = document.createDocumentFragment();
-    while (parent.children.length) {
-        frag.appendChild(parent.children[Math.floor(Math.random() * parent.children.length)]);
+    while (board.children.length) {
+        frag.appendChild(board.children[Math.floor(Math.random() * board.children.length)]);
     }
-    parent.appendChild(frag);
+    board.appendChild(frag);
 }
 
 //funkcja tworząca różną szerokośc stołu do gry w zależnośi od wybranel liczny par
 function styleCardDisplay(pair){
     if(pair <= 10) {
-        parent.classList.add("board_small");
+        board.classList.add("board_small");
     } else if (pair > 10 && pair <= 20 ){
-        parent.classList.add("board_middle");
+        board.classList.add("board_middle");
     } else if (pair >20 && pair <= 30 )
-        parent.classList.add("board_big");
+        board.classList.add("board_big");
 }
 
 //funkcja tworząca odpowiednią ilość kart w zależności od wpisanej przez użytkownika wartości par
