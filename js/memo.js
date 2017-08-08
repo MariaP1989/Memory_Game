@@ -1,5 +1,6 @@
 var button = document.querySelector(".submit");
 var linkArray = [];
+var score = 10;
 
 //listener pozwalajacy na zaakceptowanie i przekazanie wybranej ilości par do gry
 button.addEventListener("click", function(event){
@@ -34,7 +35,6 @@ var Card = function(cardNumber, cardImage){
 var board = document.querySelector(".game_board");
 var cardClicked = [];
 var cardArray = [];
-var score = 0;
 
 //funkcja zbierająca wybrane karty
 function cardCollect (){
@@ -43,6 +43,20 @@ function cardCollect (){
         cardClicked = [];
     };
 };
+
+//obliczanie wyniku
+var score = 100;
+var span_score = document.querySelector("#result");
+span_score.innerText = score;
+// w zależności od czasu poszukiwania karty
+// var second = 0;
+// function countUp (){
+//     second++;
+// }
+// var counterId = setInterval(function(){
+//     countUp();
+// }, 1000);
+
 //funkcja do porównywania czy wybrane karty są parą
 function storeCard(card1, card2){
     if(card1[0].number === card2[0].number){
@@ -55,6 +69,8 @@ function storeCard(card1, card2){
                 card2[1].removeAttribute("class");
                 card2[1].classList.add("paired");
             }, 500);
+            score += 10;
+            span_score.innerText = score;
         }
         cardClicked = [];
     } else {
@@ -67,8 +83,11 @@ function storeCard(card1, card2){
             card2[1].classList.remove("clicked");
         }, 1000);
         cardClicked = [];
+        score -= 10;
+        span_score.innerText = score;
     }
 };
+
 
 //funkcja do mieszania kart przed ułożeniem na planszy
 var parent = document.querySelector(".game_board");
@@ -81,7 +100,7 @@ function cardShuffle() {
     parent.appendChild(frag);
 }
 
-//funkcja tworząca różną szerokośc dstołu do gry w zależnośi od wybranel liczny par
+//funkcja tworząca różną szerokośc stołu do gry w zależnośi od wybranel liczny par
 function styleCardDisplay(pair){
     if(pair <= 10) {
         parent.classList.add("board_small");
@@ -111,7 +130,6 @@ function cardCreate(pair){
                             this.classList.remove("card");
                             this.style.backgroundImage = cardObject.image;
                             cardClicked.push([cardObject,newDiv]);
-                            console.log(cardClicked);
                             cardCollect();
                         } else if (this.classList !== "card"){
                             alert("Wybierz kolejną kartę");

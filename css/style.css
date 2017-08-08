@@ -30,11 +30,12 @@ body {
     width:60%;
     float: left;
 }
-#menu {
+#score {
     width: 40%;
     height: 70px;
     margin-top: 10px;
     float: right;
+    font-size: 60px;
 }
 .game_board {
     display: none;
@@ -46,11 +47,12 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    align-content: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
     width: 400px;
-    overflow: auto;
+    height: 600px;
 }
 /*middle*/
 .board_middle {
@@ -58,11 +60,12 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    align-content: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
     width: 750px;
-    overflow: auto;
+    height: 600px;
 }
 /*big*/
 .board_big {
@@ -70,11 +73,12 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    align-content: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
     width: 1000px;
-    overflow: auto;
+    height: 600px;
 }
 .game_start {
     margin-top: 30px;
