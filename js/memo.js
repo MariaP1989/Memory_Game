@@ -1,16 +1,20 @@
-
 var button = document.querySelector(".submit");
-var linkArray = []
+var linkArray = [];
+
+//listener pozwalajacy na zaakceptowanie i przekazanie wybranej ilości par do gry
 button.addEventListener("click", function(event){
     event.preventDefault();
     var input = document.querySelector("#pair_number");
-    pair = parseInt(input.value, 10);
-    input.value = "";
-    document.querySelector(".game_start").style.display = "none";
-    document.querySelector(".game_board").style.display = "block";
-    //tablica z linkami do karty
+        if(parseInt(input.value,10) > 0 && parseInt(input.value, 10) <= 30) {
+            pair = parseInt(input.value, 10);
+            input.value = "";
+            document.querySelector(".game_start").style.display = "none";
+        } else {
+            input.value = "";
+            return false;
+        }
 
-    console.log(pair)
+//pętla tworząca tablicę z linkami do kart memory
     for(var i = 1; i <= pair; i++){
         if(i < 10){
             linkArray.push("url(./icons/00"+i+".svg)");
@@ -18,34 +22,19 @@ button.addEventListener("click", function(event){
             linkArray.push("url(./icons/0"+i+".svg)");
         }
     };
-    console.log(linkArray)
     cardCreate(pair);
 });
 
-
-
+//konstruktor kart memory
 var Card = function(cardNumber, cardImage){
     this.number = cardNumber;
     this.image = cardImage;
 }
 
-//var input = document.querySelector("#pair_number");
-
-
 var board = document.querySelector(".game_board");
 var cardClicked = [];
 var cardArray = [];
 var score = 0;
-
-//tablica z linkami do karty
-// var linkArray =[];
-// for(var i = 1; i <= pair; i++){
-//     if(i < 10){
-//         linkArray.push("url(./icons/00"+i+".svg)");
-//     } else {
-//         linkArray.push("url(./icons/0"+i+".svg)");
-//     }
-// };
 
 //funkcja zbierająca wybrane karty
 function cardCollect (){
@@ -81,16 +70,27 @@ function storeCard(card1, card2){
     }
 };
 
-//funkcja do mieszania kart przed ułożeniem
+//funkcja do mieszania kart przed ułożeniem na planszy
+var parent = document.querySelector(".game_board");
+
 function cardShuffle() {
-    var parent = document.querySelector(".game_board");
-    console.log(parent);
     var frag = document.createDocumentFragment();
     while (parent.children.length) {
         frag.appendChild(parent.children[Math.floor(Math.random() * parent.children.length)]);
     }
     parent.appendChild(frag);
 }
+
+//funkcja tworząca różną szerokośc dstołu do gry w zależnośi od wybranel liczny par
+function styleCardDisplay(pair){
+    if(pair <= 10) {
+        parent.classList.add("board_small");
+    } else if (pair > 10 && pair <= 20 ){
+        parent.classList.add("board_middle");
+    } else if (pair >20 && pair <= 30 )
+        parent.classList.add("board_big");
+}
+
 //funkcja tworząca odpowiednią ilość kart w zależności od wpisanej przez użytkownika wartości par
 function cardCreate(pair){
     var cardNumber = 2 * pair;
@@ -128,5 +128,6 @@ function cardCreate(pair){
         };
     counter += 1;
     };
+    styleCardDisplay(pair);
 cardShuffle();
 };
