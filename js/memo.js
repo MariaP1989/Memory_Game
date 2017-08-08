@@ -1,7 +1,7 @@
 var button = document.querySelector(".submit");
 var linkArray = [];
 var score = 10;
-
+document.querySelector(".game_end").style.display = "none";
 //listener pozwalajacy na zaakceptowanie i przekazanie wybranej ilości par do gry
 button.addEventListener("click", function(event){
     event.preventDefault();
@@ -10,7 +10,7 @@ button.addEventListener("click", function(event){
             pair = parseInt(input.value, 10);
             input.value = "";
             document.querySelector(".game_start").style.display = "none";
-            document.querySelector(".game_end").style.display = "none";
+
         } else {
             input.value = "";
             return false;
