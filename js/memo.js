@@ -10,6 +10,7 @@ button.addEventListener("click", function(event){
             pair = parseInt(input.value, 10);
             input.value = "";
             document.querySelector(".game_start").style.display = "none";
+            document.querySelector(".game_end").style.display = "none";
         } else {
             input.value = "";
             return false;
@@ -44,7 +45,7 @@ function cardCollect (){
     };
 };
 
-//obliczanie wyniku
+//obliczanie i wyświetlanie wyniku
 var score = 100;
 var span_score = document.querySelector("#result");
 span_score.innerText = score;
@@ -71,6 +72,13 @@ function storeCard(card1, card2){
             }, 500);
             score += 10;
             span_score.innerText = score;
+            var finish = document.querySelectorAll(".card");
+            console.log(finish.length);
+            if(finish.length == 0){
+                document.querySelector(".game_end").style.display = "block";
+                document.querySelector(".game_board").style.display = "none";
+                document.querySelector(".game_end #result").innerText = score;
+            }
         }
         cardClicked = [];
     } else {
@@ -149,3 +157,8 @@ function cardCreate(pair){
     styleCardDisplay(pair);
 cardShuffle();
 };
+
+//koniec gry, restart strony
+function myFunction() {
+    location.reload();
+}
