@@ -35,26 +35,23 @@ var Card = function(cardNumber, cardImage){
     this.image = cardImage;
 }
 
-//funkcja zbierająca wybrane karty
-function cardCollect (){
-    if(cardClicked.length === 2){
-        storeCard(cardClicked[0],cardClicked[1]);
-        cardClicked = [];
-    };
-};
-
-//obliczanie i wyświetlanie wyniku
-var score = 100;
+//funkcja zbierająca wybrane karty oraz licząca punkty w zależności od czasu który minął od odkrycia pierwszej karty
+var score = 0;
 var span_score = document.querySelector("#result");
 span_score.innerText = score;
-// w zależności od czasu poszukiwania karty
-// var second = 0;
-// function countUp (){
-//     second++;
-// }
-// var counterId = setInterval(function(){
-//     countUp();
-// }, 1000);
+var second = 0;
+
+function cardCollect (){
+    if(cardClicked.length === 2){
+        clearInterval(counterId);
+        storeCard(cardClicked[0],cardClicked[1]);
+        cardClicked = [];
+    }else if(cardClicked.length === 1){
+        counterId = setInterval(function(){
+            second += 1;
+        }, 1000);
+    }
+};
 
 //funkcja do porównywania czy wybrane karty są parą
 function storeCard(card1, card2){
@@ -68,7 +65,8 @@ function storeCard(card1, card2){
                 card2[1].removeAttribute("class");
                 card2[1].classList.add("paired");
             }, 500);
-            score += 10;
+            score += 30 - second;
+            second = 0;
             span_score.innerText = score;
             var finish = document.querySelectorAll(".card");
 
@@ -89,7 +87,8 @@ function storeCard(card1, card2){
             card2[1].classList.remove("clicked");
         }, 1000);
         cardClicked = [];
-        score -= 10;
+        score -= 5;
+        second = 0;
         span_score.innerText = score;
     }
 };
