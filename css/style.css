@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 body {
-    background-image: url("../images/OAYTOW0.jpg");
+    background-image: url("../images/668012.jpg");
     background-size:cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -19,6 +19,8 @@ body {
     width: 1000px;
     height: 70px;
     clear: both;
+    color: 	#521a4a;
+    text-shadow: 1px 1px #dddddd, -1px -1px black;
 }
 
 #title {
@@ -36,6 +38,8 @@ body {
     margin-top: 10px;
     float: right;
     font-size: 60px;
+    font-weight: bolder;
+    opacity: 0.9;
 }
 .game_board {
     display: none;
