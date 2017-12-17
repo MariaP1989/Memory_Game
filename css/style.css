@@ -1,24 +1,22 @@
 *{
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 body {
     background-image: url("../images/668012.jpg");
     background-size:cover;
     background-repeat: no-repeat;
-    background-position: center;
-    width: 100%;
-    min-width: 800px;
-    height: 760px;
-    margin: 0;
+    height: 750px;
+    width: 1200px;
     position: relative;
 }
 
 .game_menu {
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
-    min-width: 1000px;
-    width: 80%;
+    width: 90%;
     height: 80px;
     clear: both;
     color: #BA01FF;
@@ -44,12 +42,24 @@ body {
 }
 #score {
     width: 30%;
-    height: 70px;
+    height: 50px;
     margin-top: 10px;
     float: right;
-    font-size: 60px;
-    font-weight: bolder;
-    opacity: 0.9;
+    font-size: 45px;
+    font-family: myFirstFont;
+}
+
+.red {
+    color: #cc0000;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #cc0000, 0 0 70px #cc0000, 0 0 80px #cc0000, 0 0 100px #cc0000, 0 0 150px #cc0000;
+    transform: scale(1.1);
+
+}
+
+.green {
+    color: #8aa52d;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #8aa52d, 0 0 70px #8aa52d, 0 0 80px #8aa52d, 0 0 100px #8aa52d, 0 0 150px #8aa52d;
+    transform: scale(1.1);
 }
 .game_board {
     display: none;
@@ -95,12 +105,11 @@ body {
     height: 600px;
 }
 .game_start {
-    margin-top: 80px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 80px;
     width: 60%;
     height: 280px;
-    overflow: auto;
     background-color: rgba(146,123,123, 0.9);
     border: 2px solid rgb(116,98,98);
 }
