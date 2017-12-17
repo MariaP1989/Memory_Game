@@ -66,13 +66,13 @@ function storeCard(card1, card2){
                 card2[1].classList.add("paired");
             }, 500);
 
-            var element = document.querySelector('#score');
-                if(element.hasAttribute('class', 'red')){
-                    element.classList.remove('red');
-                    element.classList.add('green');
-                } else {
-                    element.classList.add('green');
-                };
+            var element = document.querySelector('#result');
+            if(element.hasAttribute('class', 'red')){
+                element.classList.remove('red');
+                element.classList.add('green');
+            } else {
+                element.classList.add('green');
+            }
             score += 30 - second;
             second = 0;
             span_score.innerText = score;
@@ -94,13 +94,13 @@ function storeCard(card1, card2){
             card1[1].classList.remove("clicked");
             card2[1].classList.remove("clicked");
         }, 1000);
-        var element = document.querySelector('#score');
-            if(element.hasAttribute('class', 'green')){
-                element.classList.remove('green');
-                element.classList.add('red');
-            } else {
-                element.classList.add('red');
-            };
+        var element = document.querySelector('#result');
+        if(element.hasAttribute('class', 'green')){
+            element.classList.remove('green');
+            element.classList.add('red');
+        } else {
+            element.classList.add('red');
+        }
         cardClicked = [];
         score -= 5;
         second = 0;
