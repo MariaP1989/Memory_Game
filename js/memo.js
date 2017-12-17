@@ -145,7 +145,8 @@ function cardCreate(pair){
                         if(this.classList == "card"){
                             this.classList.add("clicked");
                             this.classList.remove("card");
-                            this.style.backgroundImage = cardObject.image;
+                            var img = cardObject.image;
+                            this.style.backgroundImage = img;
                             cardClicked.push([cardObject,newDiv]);
                             cardCollect();
                         } else if (this.classList !== "card"){
